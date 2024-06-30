@@ -5,11 +5,11 @@ CREATE TABLE stg.inventory (
 ) ;
 
 CREATE TABLE stg.sales (
-    Sale_ID INTEGER NOT NULL PRIMARY KEY,
-    Date DATE,
-    Store_ID INT,
-    Product_ID INT,
-    Units INT
+    sale_id INTEGER NOT NULL PRIMARY KEY,
+    date_sales DATE,
+    store_id INT,
+    product_id INT,
+    units INT
 );
 
 -- dimentional tables
@@ -31,5 +31,5 @@ CREATE TABLE dw.products (
 );
 
 CREATE TABLE dw.calendar (
-    Date DATE
+    calendar_date DATE
 );
