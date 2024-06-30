@@ -430,7 +430,7 @@
     <created_date>2024/06/30 12:13:21.505</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/06/30 12:13:21.505</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -502,15 +502,10 @@
       <to>dw.products</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>sales</from>
-      <to>stg.sales</to>
-      <enabled>Y</enabled>
-    </hop>
   </order>
   <step>
-    <name>stores</name>
-    <type>CsvInput</type>
+    <name>dw.products</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -519,75 +514,43 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>C:\Surf\datasets\Maven_toys\Maven+Toys\Maven Toys Data\stores.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
+    <connection>postgres_azure_maventoys</connection>
+    <schema>dw</schema>
+    <table>products</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>Store_ID</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
+        <column_name>Product_ID</column_name>
+        <stream_name>Product_ID</stream_name>
       </field>
       <field>
-        <name>Store_Name</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>50</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <column_name>Product_Name</column_name>
+        <stream_name>Product_Name</stream_name>
       </field>
       <field>
-        <name>Store_City</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>50</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <column_name>Product_Category</column_name>
+        <stream_name>Product_Category</stream_name>
       </field>
       <field>
-        <name>Store_Location</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>50</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <column_name>Product_Cost</column_name>
+        <stream_name>Product_Cost</stream_name>
       </field>
       <field>
-        <name>Store_Open_Date</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <column_name>Product_Price</column_name>
+        <stream_name>Product_Price</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -599,8 +562,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>96</yloc>
+      <xloc>625</xloc>
+      <yloc>369</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -743,62 +706,6 @@
     </GUI>
   </step>
   <step>
-    <name>stg.inventory</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres_azure_maventoys</connection>
-    <schema>stg</schema>
-    <table>inventory</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>Store_ID</column_name>
-        <stream_name>Store_ID</stream_name>
-      </field>
-      <field>
-        <column_name>Product_ID</column_name>
-        <stream_name>Product_ID</stream_name>
-      </field>
-      <field>
-        <column_name>Stock_On_Hand</column_name>
-        <stream_name>Stock_On_Hand</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>products</name>
     <type>CsvInput</type>
     <description/>
@@ -895,7 +802,7 @@
     </GUI>
   </step>
   <step>
-    <name>dw.products</name>
+    <name>stg.inventory</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -906,8 +813,8 @@
       <schema_name/>
     </partitioning>
     <connection>postgres_azure_maventoys</connection>
-    <schema>dw</schema>
-    <table>products</table>
+    <schema>stg</schema>
+    <table>inventory</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -924,24 +831,16 @@
     <return_field/>
     <fields>
       <field>
+        <column_name>Store_ID</column_name>
+        <stream_name>Store_ID</stream_name>
+      </field>
+      <field>
         <column_name>Product_ID</column_name>
         <stream_name>Product_ID</stream_name>
       </field>
       <field>
-        <column_name>Product_Name</column_name>
-        <stream_name>Product_Name</stream_name>
-      </field>
-      <field>
-        <column_name>Product_Category</column_name>
-        <stream_name>Product_Category</stream_name>
-      </field>
-      <field>
-        <column_name>Product_Cost</column_name>
-        <stream_name>Product_Cost</stream_name>
-      </field>
-      <field>
-        <column_name>Product_Price</column_name>
-        <stream_name>Product_Price</stream_name>
+        <column_name>Stock_On_Hand</column_name>
+        <stream_name>Stock_On_Hand</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -953,13 +852,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>625</xloc>
-      <yloc>369</yloc>
+      <xloc>608</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sales</name>
+    <name>stores</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -969,7 +868,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>C:\Surf\datasets\Maven_toys\Maven+Toys\Maven Toys Data\sales.csv</filename>
+    <filename>C:\Surf\datasets\Maven_toys\Maven+Toys\Maven Toys Data\stores.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -985,28 +884,6 @@
     <encoding/>
     <fields>
       <field>
-        <name>Sale_ID</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Date</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>Store_ID</name>
         <type>Integer</type>
         <format>#</format>
@@ -1018,25 +895,47 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Product_ID</name>
-        <type>Integer</type>
-        <format>#</format>
+        <name>Store_Name</name>
+        <type>String</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>50</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Units</name>
-        <type>Integer</type>
-        <format>#</format>
+        <name>Store_City</name>
+        <type>String</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>50</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Store_Location</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>50</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Store_Open_Date</name>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1049,72 +948,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>286</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>stg.sales</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>postgres_azure_maventoys</connection>
-    <schema>stg</schema>
-    <table>sales</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>Sale_ID</column_name>
-        <stream_name>Sale_ID</stream_name>
-      </field>
-      <field>
-        <column_name>Date</column_name>
-        <stream_name>Date</stream_name>
-      </field>
-      <field>
-        <column_name>Store_ID</column_name>
-        <stream_name>Store_ID</stream_name>
-      </field>
-      <field>
-        <column_name>Product_ID</column_name>
-        <stream_name>Product_ID</stream_name>
-      </field>
-      <field>
-        <column_name>Units</column_name>
-        <stream_name>Units</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>638</xloc>
-      <yloc>512</yloc>
+      <xloc>304</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
