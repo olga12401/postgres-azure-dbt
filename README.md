@@ -54,7 +54,7 @@ First, let's create a new server for our databse on the portal Azure.
 
 ### Load data to PostgreSQL
 
-1. Go to DBeaver. If you din't have, install it. 
+1. Go to DBeaver. If you don't have, install it. 
 2. Open DBeaver
 3. Click on  - >  to Database - > New Database Connection.
 4. Select ```PostgreSQL``` from the list of database drivers and click ```Next```.
@@ -99,4 +99,46 @@ select count(*) from stg.sales;
 ```
 
 ### Build models using dbt Core
+
+1. Create a new virtual environment
+
+```
+python3 -m venv venvs/dbt_env       # create the environment 
+
+```
+
+2. Activate the dbt_env environment
+
+```
+python3 -m venv venvs/dbt_env       # activate the environment for Mac and Linux OR
+
+```
+3. Install dbt-core and connect to Postgres
+
+```
+python3 -m pip install dbt-postgres
+
+```
+
+4. Check dbt version
+
+```
+dbt --version
+```
+![alt text](image-1.png)
+
+5. Run project
+
+```
+dbt init project_name
+
+```
+![alt text](image-2.png)
+
+6. Check connection dbt and database
+
+```
+dbt debug
+
+```
 
