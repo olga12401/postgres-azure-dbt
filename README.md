@@ -110,7 +110,7 @@ python3 -m venv venvs/dbt_env       # create the environment
 2. Activate the dbt_env environment
 
 ```
-python3 -m venv venvs/dbt_env       # activate the environment for Mac and Linux OR
+source venvs/dbt_env/bin/activate       # activate the environment for Mac and Linux OR
 
 ```
 3. Install dbt-core and connect to Postgres
@@ -141,4 +141,6 @@ dbt init project_name
 dbt debug
 
 ```
+![alt text](image-3.png)
+
 
