@@ -1,11 +1,11 @@
-[0m14:23:58.055650 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f53bb3aaf20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f53b98005b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f53b9800610>]}
+[0m20:53:58.064235 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f84831cd9c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8481643ac0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8481643a60>]}
 
 
-============================== 14:23:58.061782 | fa8d8973-da00-46d8-bd2a-777476c717ea ==============================
-[0m14:23:58.061782 [info ] [MainThread]: Running with dbt=1.8.3
-[0m14:23:58.062600 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/home/ovp/.dbt', 'debug': 'False', 'warn_error': 'None', 'log_path': 'logs', 'fail_fast': 'False', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt init dbt_postgres', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
-[0m14:23:58.247478 [debug] [MainThread]: Starter project path: /mnt/c/Users/ovp47/github/postgres-azure-dbt/venvs/dbt_env/lib/python3.10/site-packages/dbt/include/starter_project
-[0m14:23:58.413610 [info ] [MainThread]: 
+============================== 20:53:58.088837 | 7b814a5a-8ad1-41f2-8751-e5627addd829 ==============================
+[0m20:53:58.088837 [info ] [MainThread]: Running with dbt=1.8.3
+[0m20:53:58.090623 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'debug': 'False', 'log_path': 'logs', 'profiles_dir': '/home/ovp/.dbt', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'invocation_command': 'dbt init dbt_postgres', 'introspect': 'True', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m20:53:59.027352 [debug] [MainThread]: Starter project path: /mnt/c/Users/ovp47/github/postgres-azure-dbt/venvs/dbt_env/lib/python3.10/site-packages/dbt/include/starter_project
+[0m20:54:00.094103 [info ] [MainThread]: 
 Your new dbt project "dbt_postgres" was created!
 
 For more information on how to configure the profiles.yml file,
@@ -21,9 +21,9 @@ Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
 
 Happy modeling!
 
-[0m14:23:58.414335 [info ] [MainThread]: Setting up your profile.
-[0m14:29:59.250929 [info ] [MainThread]: Profile dbt_postgres written to /home/ovp/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
-[0m14:29:59.259469 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 361.24268, "process_user_time": 0.904942, "process_kernel_time": 0.388292, "process_mem_max_rss": "95340", "process_in_blocks": "20240", "process_out_blocks": "8"}
-[0m14:29:59.261980 [debug] [MainThread]: Command `dbt init` succeeded at 14:29:59.261750 after 361.25 seconds
-[0m14:29:59.264363 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f53bb3aaf20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f53b97d5d80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f53b9800280>]}
-[0m14:29:59.266657 [debug] [MainThread]: Flushing usage events
+[0m20:54:00.096659 [info ] [MainThread]: Setting up your profile.
+[0m21:02:40.439322 [info ] [MainThread]: Profile dbt_postgres written to /home/ovp/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m21:02:40.447562 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 522.4472, "process_user_time": 1.619533, "process_kernel_time": 1.037856, "process_mem_max_rss": "95616", "process_in_blocks": "19560", "process_out_blocks": "8"}
+[0m21:02:40.449883 [debug] [MainThread]: Command `dbt init` succeeded at 21:02:40.449654 after 522.45 seconds
+[0m21:02:40.453516 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f84831cd9c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8482206c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8481643a00>]}
+[0m21:02:40.458085 [debug] [MainThread]: Flushing usage events
