@@ -17,18 +17,18 @@ product as (
 
 joined as (
     select
-        s.date_sales,
-        s.store_id,
-        s.product_id,
-        s.units,
-        p.name as product_name,
-        p.category as product_category,
-        p.price as product_price,
-        p.cost as product_cost,
-        s.etl_timestamp
-    from sales as s
-    left join product as p
-    on s.product_id = p.product_id
+        sales.date_sales,
+        sales.store_id,
+        sales.product_id,
+        sales.units,
+        product.name as product_name,
+        product.category as product_category,
+        product.price as product_price,
+        product.cost as product_cost,
+        sales.etl_timestamp
+    from sales
+    left join product
+        on sales.product_id = product.product_id
 )
 
 select * from joined

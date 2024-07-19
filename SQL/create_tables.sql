@@ -1,33 +1,33 @@
 CREATE TABLE stg.inventory (
-	Store_ID INTEGER,
-	Product_ID INTEGER,
-	Stock_On_Hand INTEGER
-) ;
+    store_id INTEGER,
+    product_id INTEGER,
+    stock_on_hand INTEGER
+);
 
 CREATE TABLE stg.sales (
     sale_id INTEGER NOT NULL PRIMARY KEY,
     date_sales DATE,
-    store_id INT,
-    product_id INT,
-    units INT
+    store_id INTEGER,
+    product_id INTEGER,
+    units INTEGER
 );
 
--- dimentional tables
+-- Dimensional tables
 
 CREATE TABLE dw.stores (
-    Store_ID INTEGER NOT NULL PRIMARY KEY,
-    Store_Name VARCHAR(255),
-    Store_City VARCHAR(255),
-    Store_Location VARCHAR(255),
-    Store_Open_Date DATE
+    store_id INTEGER NOT NULL PRIMARY KEY,
+    store_name VARCHAR(255),
+    store_city VARCHAR(255),
+    store_location VARCHAR(255),
+    store_open_date DATE
 );
 
 CREATE TABLE dw.products (
-    Product_ID INTEGER NOT NULL primary key ,
-    Product_Name VARCHAR(255),
-    Product_Category VARCHAR(255),
-    Product_Cost NUMERIC(5,2),
-    Product_Price NUMERIC(5,2)
+    product_id INTEGER NOT NULL PRIMARY KEY,
+    product_name VARCHAR(255),
+    product_category VARCHAR(255),
+    product_cost NUMERIC(5, 2),
+    product_price NUMERIC(5, 2)
 );
 
 CREATE TABLE dw.calendar (
