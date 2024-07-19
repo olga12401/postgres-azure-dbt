@@ -143,4 +143,58 @@ dbt debug
 ```
 ![alt text](image-3.png)
 
+7. Specify the development and production connection details to deploy models to your data warehouse in either environment. Ensure that profiles.yml uses spaces for indentation instead of tabs.
+
+```
+dbt_postgres:
+  outputs:
+    dev:
+      dbname: maventoys_dw_prod
+      host: maventoys-prod.postgres.database.azure.com
+      pass: ****** #put you password
+      port: 5432
+      schema: stg  # schema name in DB
+      threads: 1
+      type: postgres
+      user: olyadmin
+    prod:
+      dbname: maventoys_dw_prod
+      host: maventoys-prod.postgres.database.azure.com 
+      pass: ***** #put you password
+      port: 5432
+      schema: dw # schema name in DB
+      threads: 1
+      type: postgres
+      user: olyadmin
+  target: dev
+
+```
+
+8. Build staging model using Medallion Architecture - in context of ```dbt``` . The project structure will look like this:
+
+```
+    ├── dbt_postgres/
+    │   ├── models/
+    │   │   ├── bronze/
+    │   │   │   ├── stg_sales.sql
+    │   │   │   ├── stg_inventory.sql
+    │   │   │   ├── stg_calendar.sql
+    │   │   │   ├── stg_stores.sql
+    │   │   │   ├── stg_product.sql
+    │   │   ├── silver/
+    │   │   │   ├── mrt_sales.sql
+    │   │   │   ├── mrt_inventory.sql
+    │   │   │   ├── dim_calendar.sql
+    │   │   │   ├── dim_stores.sql
+    │   │   │   ├── dim_product.sql
+    │   │   ├── gold/
+    │   │   │   ├── inventory_sales_summary.sql
+    │   │   │   ├── sales_product_summary.sql
+    │   │   ├── sources.yml
+    │   ├── dbt_project.yml
+    ├── venvs/
+    ├── .gitignore
+    ├── README.md
+```
+![alt text](image-4.png)
 

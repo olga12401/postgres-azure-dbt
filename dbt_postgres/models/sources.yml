@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: stg
+    schema: stg
+    tables:
+      - name: sales
+      - name: inventory
+  - name: dw
+    schema: dw
+    tables:
+      - name: calendar
+      - name: stores
+      - name: products
+
+
+
+ 
