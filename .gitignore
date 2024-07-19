@@ -1,11 +1,11 @@
 # Ignore virtual environment directories
 venvs/dbt_env/
 
-# Ignore dbt target and packages
+# Ignore data folder
+data/
 
-dbt_postgres/target/
-dbt_postgres/dbt_packages/
 # Ignore log files
 logs/
+
 .gitkeep
 
