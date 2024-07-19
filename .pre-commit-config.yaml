@@ -10,4 +10,6 @@ repos:
     rev: 0.11.2
     hooks:
       - id: sqlfluff-lint
-        args: ["--dialect", "postgres"]
+        args: [--dialect, postgres]  # Specify your SQL dialect here
+      - id: sqlfluff-fix
+        args: [--dialect, postgres]  # Specify your SQL dialect here
