@@ -17,15 +17,16 @@ inventory as (
 
 joined as (
     select
-        s.date_sales,
-        s.store_id,
-        s.product_id,
-        s.units,
-        i.stock_on_hand,
-        s.etl_timestamp
-    from sales as s
-    left join inventory as i
-    on s.store_id = i.store_id and s.product_id = i.product_id
+        sales.date_sales,
+        sales.store_id,
+        sales.product_id,
+        sales.units,
+        inventory.stock_on_hand,
+        sales.etl_timestamp
+    from sales
+    left join inventory
+        on sales.store_id = inventory.store_id
+            and sales.product_id = inventory.product_id
 )
 
 select * from joined

@@ -20,6 +20,49 @@ This project demonstrates the implementation of a dimensional model on a remote 
 
 1. Create a new repository
 2. in VScode create a new branch, in the branch create a new file readme.md and create a PR for this change.
+3. Create pre-commit
+
+```
+# Navigate to your repository if not already there
+cd path/to/your/postgres-azure-dbt
+
+# Create the .pre-commit-config.yaml file
+touch .pre-commit-config.yaml
+
+# Open the file in a text editor and add the content
+echo 'repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: v1.1.1
+    hooks:
+      - id: sqlfluff-lint
+        args: ["--dialect", "postgres"]' > .pre-commit-config.yaml
+
+# Install Pre-Commit
+pip install pre-commit
+
+# Install Sqlfluff
+pip install sqlfluff
+
+# Install the pre-commit hooks
+pre-commit install
+
+# Run pre-commit on all files
+pre-commit run --all-files
+
+# Add and commit the changes
+git add .pre-commit-config.yaml
+git commit -m "Add pre-commit configuration for YAML, trailing whitespace, and SQL linting"
+
+# Push the changes to the repository
+git push origin main  # or your current branch
+```
 
 ### Azure Database for PostgreSQL flexible server
 
@@ -29,7 +72,7 @@ First, let's create a new server for our databse on the portal Azure.
 2. Create a new resource group
 3. Greate a resourse - > choose Databases -> Azure Database for PostgreSQL
 4. Configure the PostgreSQL Server
-   
+
    Fill in the required details:
 
     - Subscription: Choose your subscription.
@@ -54,7 +97,7 @@ First, let's create a new server for our databse on the portal Azure.
 
 ### Load data to PostgreSQL
 
-1. Go to DBeaver. If you don't have, install it. 
+1. Go to DBeaver. If you don't have, install it.
 2. Open DBeaver
 3. Click on  - >  to Database - > New Database Connection.
 4. Select ```PostgreSQL``` from the list of database drivers and click ```Next```.
@@ -78,7 +121,7 @@ First, let's create a new server for our databse on the portal Azure.
 The ETL (Extract, Transform, Load) process is handled by Pentaho Data Integration (PDI). The process involves extracting data from source (in our case the data is in CSV), transforming it into the desired format, and loading it into the PostgreSQL database on Azure. Jobs and Transformations are located in ETL.
 
 1. Install Data Integration
-2. Open PDI -> Create a new file (tupe transformation) -> Go to design tab 
+2. Open PDI -> Create a new file (tupe transformation) -> Go to design tab
 3. Input folder -> CSV file Input -> drag it to new file. Configure it.
 4. Output folder -> Table output -> drag it and configurete. Go to the Database Connections and set up a new connection using the details of your DB. test connection.
 5. Add a new hop connection between 2 steps.
@@ -86,7 +129,7 @@ The ETL (Extract, Transform, Load) process is handled by Pentaho Data Integratio
 
 ![alt text](image.png)
 
-7. We need to extract and load 5 tables: ``` calendar ```, ```sales```, ```products```, ```inventory```, ```stores```. 
+7. We need to extract and load 5 tables: ``` calendar ```, ```sales```, ```products```, ```inventory```, ```stores```.
 8. Open DBeaver and run the following queries to check the loaded data:
 
 ```
@@ -103,7 +146,7 @@ select count(*) from stg.sales;
 1. Create a new virtual environment
 
 ```
-python3 -m venv venvs/dbt_env       # create the environment 
+python3 -m venv venvs/dbt_env       # create the environment
 
 ```
 
@@ -159,7 +202,7 @@ dbt_postgres:
       user: olyadmin
     prod:
       dbname: maventoys_dw_prod
-      host: maventoys-prod.postgres.database.azure.com 
+      host: maventoys-prod.postgres.database.azure.com
       pass: ***** #put you password
       port: 5432
       schema: dw # schema name in DB
@@ -198,3 +241,39 @@ dbt_postgres:
 ```
 ![alt text](image-4.png)
 
+9. Add the dbt freshness test
+
+```
+version: 2
+
+sources:
+  - name: stg
+    schema: stg
+    tables:
+      - name: sales
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 2, period: day}
+        loaded_at_field: loaded_at  # Make sure this field exists in your table
+      - name: inventory
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 2, period: day}
+        loaded_at_field: loaded_at  # Make sure this field exists in your table
+  - name: dw
+    schema: dw
+    tables:
+      - name: calendar
+      - name: stores
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 2, period: day}
+        loaded_at_field: loaded_at  # Make sure this field exists in your table
+      - name: products
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 2, period: day}
+        loaded_at_field: loaded_at  # Make sure this field exists in your table
+```
+
+Run ```dbt source freshness``` .

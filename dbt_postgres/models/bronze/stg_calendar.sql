@@ -10,14 +10,12 @@ with source as (
 renamed as (
     select
         calendar_date,
-        extract(month from calendar_date) as month,
-        extract(year from calendar_date) as year,
-        extract(week from calendar_date) as week,
-        extract(dow from calendar_date) as week_day,
+        extract(month from calendar_date) as month_num,
+        extract(year from calendar_date) as year_num,
+        extract(week from calendar_date) as week_num,
+        extract(dow from calendar_date) as weekday_num,
         now() as etl_timestamp
     from source
 )
 
 select * from renamed
-
-
