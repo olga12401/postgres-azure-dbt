@@ -5,7 +5,7 @@
 
 select
     store_id,
-    product_id,
+    prod_id,
     stock_on_hand,
     etl_timestamp
 from {{ ref('stg_inventory') }}

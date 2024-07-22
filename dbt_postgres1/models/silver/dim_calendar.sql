@@ -5,9 +5,9 @@
 
 select
     calendar_date,
-    month,
-    year,
-    week,
-    week_day,
+    month_num,
+    year_num,
+    week_num,
+    weekday_num,
     etl_timestamp
 from {{ ref('stg_calendar') }}

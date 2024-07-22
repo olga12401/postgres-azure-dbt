@@ -1,6 +1,6 @@
 {{ config(
     materialized='table',
-    alias='inventory_sales_summary'
+    alias='sales_product_summary'
 ) }}
 
 with sales as (
@@ -9,24 +9,26 @@ with sales as (
     from {{ ref('mrt_sales') }}
 ),
 
-inventory as (
+product as (
     select
         *
-    from {{ ref('mrt_inventory') }}
+    from {{ ref('dim_product') }}
 ),
 
 joined as (
     select
         sales.date_sales,
         sales.store_id,
-        sales.product_id,
+        sales.prod_id,
         sales.units,
-        inventory.stock_on_hand,
+        product.prod_name,
+        product.prod_category,
+        product.prod_price,
+        product.prod_cost,
         sales.etl_timestamp
     from sales
-    left join inventory
-        on sales.store_id = inventory.store_id
-            and sales.product_id = inventory.product_id
+    left join product
+        on sales.prod_id = product.prod_id
 )
 
 select * from joined

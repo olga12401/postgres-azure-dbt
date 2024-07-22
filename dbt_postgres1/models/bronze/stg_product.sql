@@ -9,11 +9,11 @@ with source as (
 
 renamed as (
     select
-        product_id,
-        product_name as name,
-        product_category as category,
-        product_cost as cost,
-        product_price as price,
+        product_id as prod_id,
+        product_name as prod_name,
+        product_category as prod_category,
+        product_cost as prod_cost,
+        product_price as prod_price,
         now() as etl_timestamp
     from source
 )
