@@ -4,10 +4,10 @@
 ) }}
 
 select
-    product_id,
-    name,
-    category,
-    cost,
-    price,
+    prod_id,
+    prod_name,
+    prod_category,
+    prod_cost,
+    prod_price,
     etl_timestamp
 from {{ ref('stg_product') }}

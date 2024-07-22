@@ -7,7 +7,7 @@ select
     sale_id,
     date_sales,
     store_id,
-    product_id,
+    product_id as prod_id,
     units,
     now() as etl_timestamp
 from {{ source('stg', 'sales') }}

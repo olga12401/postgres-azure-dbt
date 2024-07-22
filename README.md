@@ -146,7 +146,8 @@ select count(*) from stg.sales;
 1. Create a new virtual environment
 
 ```
-python3 -m venv venvs/dbt_env       # create the environment
+
+ python3 -m venv venvs/dbt_env      # create the environment
 
 ```
 
@@ -241,7 +242,19 @@ dbt_postgres:
 ```
 ![alt text](image-4.png)
 
-9. Add the dbt freshness test
+Running models:
+```
+-- bronze models
+
+dbt run --select stg_sales --target dev
+dbt run --select stg_inventory --target dev
+dbt run --select stg_calendar --target dev
+dbt run --select stg_stores --target dev
+dbt run --select stg_product --target dev
+```
+
+
+9. The dbt freshness test
 
 ```
 version: 2
@@ -277,3 +290,5 @@ sources:
 ```
 
 Run ```dbt source freshness``` .
+
+10.

@@ -1,0 +1,144 @@
+version: 2
+
+models:
+  - name: stg_sales
+    description: "Bronze layer for sales data"
+    columns:
+      - name: sale_id
+        description: "Unique identifier for each sale"
+        data_tests:
+          - unique
+          - not_null
+      - name: date_sales
+        description: "Date of the sale"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ["2022-01-01", "2022-01-02", "2022-01-03"]
+      - name: store_id
+        description: "Identifier for the store"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_stores')
+              field: store_id
+      - name: prod_id
+        description: "Identifier for the product"
+        datat_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_product')
+              field: prod_id
+      - name: units
+        description: "Number of units sold"
+        data_tests:
+          - not_null
+          - positive
+
+  - name: stg_inventory
+    description: "Bronze layer for inventory data"
+    columns:
+      - name: store_id
+        description: "Identifier for the store"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_stores')
+              field: store_id
+      - name: prod_id
+        description: "Identifier for the product"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_product')
+              field: prod_id
+      - name: stock_on_hand
+        description: "Number of units in stock"
+        data_tests:
+          - not_null
+          - positive
+
+  - name: stg_calendar
+    description: "Bronze layer for calendar data"
+    columns:
+      - name: calendar_date
+        description: "Date"
+        data_tests:
+          - unique
+          - not_null
+      - name: month_num
+        description: "Month number"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      - name: year_num
+        description: "Year number"
+        data_tests:
+          - not_null
+      - name: week_num
+        description: "Week number"
+        data_tests:
+          - not_null
+          - between:
+              min_value: 1
+              max_value: 53
+      - name: weekday_num
+        description: "Weekday number"
+        data_tests:
+          - not_null
+          - between:
+              min_value: 0
+              max_value: 6
+
+  - name: stg_product
+    description: "Bronze layer for product data"
+    columns:
+      - name: prod_id
+        description: "Unique identifier for each product"
+        data_tests:
+          - unique
+          - not_null
+      - name: prod_name
+        description: "Name of the product"
+        data_tests:
+          - not_null
+      - name: prod_category
+        description: "Category of the product"
+        data_tests:
+          - not_null
+      - name: prod_cost
+        description: "Cost of the product"
+        data_tests:
+          - not_null
+          - positive
+      - name: prod_price
+        description: "Price of the product"
+        data_tests:
+          - not_null
+          - positive
+
+  - name: stg_stores
+    description: "Bronze layer for store data"
+    columns:
+      - name: store_id
+        description: "Unique identifier for each store"
+        data_tests:
+          - unique
+          - not_null
+      - name: store_name
+        description: "Name of the store"
+        data_tests:
+          - not_null
+      - name: store_city
+        description: "City where the store is located"
+        data_tests:
+          - not_null
+      - name: store_location
+        description: "Location type of the store"
+        data_tests:
+          - not_null
+      - name: store_open_date
+        description: "Date when the store was opened"
+        data_tests:
+          - not_null

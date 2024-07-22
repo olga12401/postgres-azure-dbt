@@ -7,7 +7,7 @@ select
     sale_id,
     date_sales,
     store_id,
-    product_id,
+    prod_id,
     units,
     etl_timestamp
 from {{ ref('stg_sales') }}
