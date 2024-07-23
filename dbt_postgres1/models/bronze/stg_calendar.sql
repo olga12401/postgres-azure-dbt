@@ -4,7 +4,7 @@
 ) }}
 
 with source as (
-    select * from {{ source('dw', 'calendar') }}
+    select * from {{ source('raw', 'calendar') }}
 ),
 
 renamed as (

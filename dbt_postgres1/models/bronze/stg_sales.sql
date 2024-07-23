@@ -10,4 +10,4 @@ select
     product_id as prod_id,
     units,
     now() as etl_timestamp
-from {{ source('stg', 'sales') }}
+from {{ source('raw', 'sales') }}
