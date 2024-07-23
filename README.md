@@ -20,49 +20,7 @@ This project demonstrates the implementation of a dimensional model on a remote 
 
 1. Create a new repository
 2. in VScode create a new branch, in the branch create a new file readme.md and create a PR for this change.
-3. Create pre-commit
 
-```
-# Navigate to your repository if not already there
-cd path/to/your/postgres-azure-dbt
-
-# Create the .pre-commit-config.yaml file
-touch .pre-commit-config.yaml
-
-# Open the file in a text editor and add the content
-echo 'repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: v1.1.1
-    hooks:
-      - id: sqlfluff-lint
-        args: ["--dialect", "postgres"]' > .pre-commit-config.yaml
-
-# Install Pre-Commit
-pip install pre-commit
-
-# Install Sqlfluff
-pip install sqlfluff
-
-# Install the pre-commit hooks
-pre-commit install
-
-# Run pre-commit on all files
-pre-commit run --all-files
-
-# Add and commit the changes
-git add .pre-commit-config.yaml
-git commit -m "Add pre-commit configuration for YAML, trailing whitespace, and SQL linting"
-
-# Push the changes to the repository
-git push origin main  # or your current branch
-```
 
 ### Azure Database for PostgreSQL flexible server
 
@@ -253,42 +211,65 @@ dbt run --select stg_stores --target dev
 dbt run --select stg_product --target dev
 ```
 
-
-9. The dbt freshness test
+9. Add pre-commit
 
 ```
-version: 2
+# Navigate to your repository if not already there
+cd path/to/your/postgres-azure-dbt
 
-sources:
-  - name: stg
-    schema: stg
-    tables:
-      - name: sales
-        freshness:
-          warn_after: {count: 1, period: day}
-          error_after: {count: 2, period: day}
-        loaded_at_field: loaded_at  # Make sure this field exists in your table
-      - name: inventory
-        freshness:
-          warn_after: {count: 1, period: day}
-          error_after: {count: 2, period: day}
-        loaded_at_field: loaded_at  # Make sure this field exists in your table
-  - name: dw
-    schema: dw
-    tables:
-      - name: calendar
-      - name: stores
-        freshness:
-          warn_after: {count: 1, period: day}
-          error_after: {count: 2, period: day}
-        loaded_at_field: loaded_at  # Make sure this field exists in your table
-      - name: products
-        freshness:
-          warn_after: {count: 1, period: day}
-          error_after: {count: 2, period: day}
-        loaded_at_field: loaded_at  # Make sure this field exists in your table
+# Create the .pre-commit-config.yaml file
+touch .pre-commit-config.yaml
+
+# Open the file in a text editor and add the content
+echo 'repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: v1.1.1
+    hooks:
+      - id: sqlfluff-lint
+        args: ["--dialect", "postgres"]' > .pre-commit-config.yaml
+
+# Install Pre-Commit
+pip install pre-commit
+
+# Install Sqlfluff
+pip install sqlfluff
+
+# Install the pre-commit hooks
+pre-commit install
+
+# Run pre-commit on all files
+pre-commit run --all-files
+
+# Add and commit the changes
+git add .pre-commit-config.yaml
+git commit -m "Add pre-commit configuration for YAML, trailing whitespace, and SQL linting"
+
+# Push the changes to the repository
+git push origin main  # or your current branch
+
 ```
 
+10. Add the dbt freshness test
+
+When considering freshness tests in DBT, it's generally a best practice to check the raw data tables, especially if you want to ensure that the data pipeline is functioning correctly from the very beginning. Freshness tests help to ensure that the data being ingested into your system is up-to-date and reflects the latest available inf.
+
+However, there are cases where it might make sense to check the freshness of the staging (stg) tables at the
+ - Raw Data Availability
+ - Staging Tables as Source
+ - Data Processing Delays
+
+```warn_after: {count: 1, period: day}```
+This setting specifies that a warning should be raised if the data is older than 1 day. The count and period parameters together define the threshold for when the warning should be triggered. In this case, if the data hasn't been updated in more than 1 day, dbt will generate a warning.
+```error_after: {count: 2, period: day}``` This setting specifies that an error should be raised if the data is older than 2 days. Similar to the warn_after parameter, the count and period parameters together define the threshold for when the error should be triggered.
 Run ```dbt source freshness``` .
 
-10.
+11. Generic test
+
+Create ```schema.yml``` file
