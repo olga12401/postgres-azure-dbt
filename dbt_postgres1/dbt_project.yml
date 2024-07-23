@@ -33,6 +33,10 @@ models:
   dbt_postgres1:
     bronze:
       materialized: 'view'
+      stg_sales:
+        +tests:
+          - tests.valid_sales_date
+          - tests.no_negative_stock
     silver:
       materialized: 'table'
     gold:
