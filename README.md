@@ -211,7 +211,9 @@ dbt run --select stg_stores --target dev
 dbt run --select stg_product --target dev
 ```
 
-9. Add pre-commit
+9. Pre-commit
+
+Using pre-commit hooks in a development workflow offers several benefits that help maintain code quality, enforce coding standards, and catch errors early in the development process.
 
 ```
 # Navigate to your repository if not already there
