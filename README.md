@@ -219,23 +219,13 @@ Using pre-commit hooks in a development workflow offers several benefits that he
 # Navigate to your repository if not already there
 cd path/to/your/postgres-azure-dbt
 
+# Create a new branch
+git checkout -b add-pre-commit-hooks
+
 # Create the .pre-commit-config.yaml file
 touch .pre-commit-config.yaml
 
-# Open the file in a text editor and add the content
-echo 'repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: v1.1.1
-    hooks:
-      - id: sqlfluff-lint
-        args: ["--dialect", "postgres"]' > .pre-commit-config.yaml
+# Add the content to the .pre-commit-config.yaml
 
 # Install Pre-Commit
 pip install pre-commit
@@ -253,8 +243,8 @@ pre-commit run --all-files
 git add .pre-commit-config.yaml
 git commit -m "Add pre-commit configuration for YAML, trailing whitespace, and SQL linting"
 
-# Push the changes to the repository
-git push origin main  # or your current branch
+# Push the changes to the new branch
+git push origin add-pre-commit-hooks
 
 ```
 
